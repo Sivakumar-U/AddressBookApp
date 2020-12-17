@@ -48,6 +48,46 @@ window.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 
+const saveForm = () => {
+    try {
+        let addressBook = createAddressBook();
+    } catch (e) {
+        return
+    }
+}
+
+const createAddressBook = () => {
+    let addressBook = new AddressBookData();
+    try {
+        addressBook.name = getInputValueById('#name');
+    } catch (e) {
+        setTextValue('.text-error', e);
+        throw e;
+    }
+    try {
+        addressBook.address = getInputValueById('#address');
+    } catch (e) {
+        setTextValue('.address-error', e);
+        throw e;
+    }
+    addressBook.city = document.getElementById("city").value;
+    addressBook.state = document.getElementById("state").value;
+    addressBook.zip = getInputValueById('#zip');
+    try {
+        addressBook.phoneNumber = getInputValueById('#phoneNo');
+    } catch (e) {
+        setTextValue('.phoneNo-output', e);
+        throw e;
+    }
+    alert(addressBook.toString());
+    return addressBook;
+}
+
+const getInputValueById = (id) => {
+    let value = document.querySelector(id).value;
+    return value;
+}
+
 const setaddressBookJSONObject = () => {
     addressBookJSONObject._name = getInputValueById('#name');
     addressBookJSONObject._address = getInputValueById('#address');
@@ -56,9 +96,4 @@ const setaddressBookJSONObject = () => {
     addressBookJSONObject._zip = getInputValueById('#zip');
     addressBookJSONObject._phoneNumber = getInputValueById('#phoneNo');
     alert("Added Json Object : " + addressBookJSONObject._name);
-};
-
-const getInputValueById = (propertyId) => {
-    let value = document.querySelector(propertyId).value;
-    return value;
 };
