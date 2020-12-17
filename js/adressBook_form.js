@@ -1,3 +1,4 @@
+let addressBookJSONObject = {};
 window.addEventListener('DOMContentLoaded', (event) => {
     const name = document.querySelector('#name');
     const nameOutput = document.querySelector('.text-error');
@@ -46,3 +47,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 });
+
+const setaddressBookJSONObject = () => {
+    addressBookJSONObject._name = getInputValueById('#name');
+    addressBookJSONObject._address = getInputValueById('#address');
+    addressBookJSONObject._city = getInputValueById('#city');
+    addressBookJSONObject._state = getInputValueById('#state');
+    addressBookJSONObject._zip = getInputValueById('#zip');
+    addressBookJSONObject._phoneNumber = getInputValueById('#phoneNo');
+    alert("Added Json Object : " + addressBookJSONObject._name);
+};
+
+const getInputValueById = (propertyId) => {
+    let value = document.querySelector(propertyId).value;
+    return value;
+};
