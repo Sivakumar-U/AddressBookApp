@@ -52,6 +52,8 @@ const saveForm = () => {
     try {
         let addressBook = createAddressBook();
         createAndUpdateStorage(addressBook);
+        resetForm();
+        window.location.replace(site_properties.home_page);
     } catch (e) {
         return
     }
@@ -71,9 +73,9 @@ const createAddressBook = () => {
         setTextValue('.address-error', e);
         throw e;
     }
-    addressBook.city = document.getElementById("city").value;
-    addressBook.state = document.getElementById("state").value;
-    addressBook.zip = getInputValueById('#zip');
+    addressBook.city = document.getElementById("City").value;
+    addressBook.state = document.getElementById("State").value;
+    addressBook.zip = getInputValueById('#Zip');
     try {
         addressBook.phoneNumber = getInputValueById('#phoneNo');
     } catch (e) {
@@ -99,6 +101,25 @@ function createAndUpdateStorage(addressBook) {
     alert(addressBookList.toString());
     localStorage.setItem("AddressBookList", JSON.stringify(addressBookList));
 }
+
+const resetForm = () => {
+    setValue('#name', "");
+    setValue('#address', "");
+    setValue('#city', '');
+    setSelectedIndex('#state', );
+    setSelectedIndex('#zip', );
+    setValue('#phoneNo', "");
+}
+
+const setValue = (id, value) => {
+    const element = document.getElementById(id);
+    element.value = value;
+}
+
+const setSelectedIndex = (id, index) => {
+    const element = document.querySelector(id);
+    element.selectedIndex = index;
+};
 
 const setaddressBookJSONObject = () => {
     addressBookJSONObject._name = getInputValueById('#name');
