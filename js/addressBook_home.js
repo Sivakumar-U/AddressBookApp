@@ -1,11 +1,17 @@
 window.addEventListener("DOMContentLoaded", (event) => {
+    addressBookList = getAddressBookDataFromStorage();
+    document.querySelector(".person-count").textContent = addressBookList.length;
     createInnerHtml();
 });
 
+const getAddressBookDataFromStorage = () => {
+    return localStorage.getItem('AddressBookList') ? JSON.parse(localStorage.getItem('AddressBookList')) : [];
+}
+
 const createInnerHtml = () => {
     const headerHtml = "<tr><th>Fullname</th><th>Address</th><th>City</th><th>State</th><th>Zip Code</th><th>Phone Number</th><th></th></tr>"
+    if (addressBookList.length == 0) return;
     let innerHtml = `${headerHtml}`
-    let addressBookList = createAddressBookJSON();
     for (const contact of addressBookList) {
         innerHtml = `${innerHtml}
     <tr>
@@ -23,26 +29,4 @@ const createInnerHtml = () => {
     `;
     }
     document.querySelector("#display").innerHTML = innerHtml;
-};
-
-const createAddressBookJSON = () => {
-    let addressBookListLocal = [{
-            _name: "Siva Reddy",
-            _address: "Paravolu",
-            _city: "Nellore",
-            _state: "Andhra Pradesh",
-            _zip: "517520",
-            _phoneNumber: "7896541230"
-
-        },
-        {
-            _name: "Dileep",
-            _address: "Nagiri",
-            _city: "Tirupati",
-            _state: "Andhra Pradesh",
-            _zip: "517542",
-            _phoneNumber: "8792546130"
-        }
-    ];
-    return addressBookListLocal;
 };
